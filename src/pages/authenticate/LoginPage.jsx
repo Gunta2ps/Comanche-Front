@@ -1,11 +1,14 @@
 import { useState } from "react";
+import useUser from "../../hooks/useUser";
 
-function Login() {
+
+function LoginPage() {
+  const {login} = useUser()
   const [form, seForm] = useState({
     email:'',
     password:''
   })
-  
+  console.log(login);
   const handleChange = (e) =>{
     seForm({...form, [e.target.name]: e.target.value})
   }
@@ -13,6 +16,11 @@ function Login() {
   const handleSubmit = async (e) =>{
     e.preventDefault()
     console.log(form);
+    try {
+      await login(form)  
+    } catch (error) {
+      console.log(error.message);
+    }
   }
   return (
     <div className="h-screen bg-blue-400 flex items-center justify-center">
@@ -43,4 +51,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginPage;

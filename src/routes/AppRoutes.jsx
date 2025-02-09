@@ -1,16 +1,17 @@
 import { Route, Routes } from "react-router";
-import Login from "../pages/authenticate/Login";
+import LoginPage from "../pages/authenticate/LoginPage";
 import AdminLayout from "../layouts/AdminLayout";
 import CustomerList from "../pages/admin/CustomerList";
+import ProtectRoute from "./ProtectRoute";
 
 function AppRoutes() {
   return (
     <div>
       <Routes>
         <Route path="/">
-          <Route index element={<Login />} />
+          <Route index element={<LoginPage />} />
         </Route>
-        <Route path="admin" element={<AdminLayout/>}>
+        <Route path="admin" element={<ProtectRoute element={<AdminLayout/>} allow={['ADMIN']}/>}>
           <Route index element={<CustomerList/>}/>
         </Route>
       </Routes>
